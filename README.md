@@ -65,5 +65,6 @@ for key in range(0, len(column_edges)):
     p.add_edges(all_points, column_edges[key], shading = {"line_color":color[key%2] , "line_width": 5.0})
 
 ```
+<img title="Cylinder Crochet Graph" alt="Cylinder crochet graph" src="/images/cylinder.png">
 
 Now generate some patterns and crochet.
