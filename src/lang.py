@@ -812,7 +812,7 @@ def run(fn, text):
 	ast = parser.parse()
 	if ast.error: return None, ast.error
 	
-	print(ast.node)
+	#print(ast.node)
 	# # Run program
 	interpreter = Interpreter()
 	context = Context('<program>')

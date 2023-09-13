@@ -4,19 +4,19 @@ It can create crochet patterns with single crochet, increases and decreses based
 
 ## Requirements
 You need to install *lib igl* python bindings: 
-```
+```python
 python -m pip install libigl
 ```
 or see https://github.com/libigl/libigl-python-bindings for more details
 
 and install *vedo* specifiaclly pygeodesic
-```
+```python
 pip install pygeodesic
 ```
 or see https://github.com/mhogg/pygeodesic for more details    
 
 It might also be good to have a library for 3D visualisation. Matplotlib returned the 3D models a little distorted so I used meshplot
-```
+```python
 conda install -c conda-forge meshplot 
 ```
 or see https://skoch9.github.io/meshplot/tutorial/ for more details
@@ -29,14 +29,14 @@ The 3D model has to fullfill some requirements:
 - it has to have a vertice at the point you want the pattern to start
 - It has to be closed or one-edged otherwise the pattern is not correctly generated
 
-```
+```python
 import mesh_to_instructions
 import print_pattern
 ```
 
 You can create a pattern by running mesh_to_instructions.run the function requires a file of a 3D model, the desired stitchwidth (= metric hook size) and a start index as an integer that exists in the file.
 
-``` 
+```python
 instructions, all_points, sample_points, faces, row_edges, column_edges, g_v, g_e, isolines = mesh_to_instructions.run(file, stitch_width , start_index) # includes results for debugging and representation such a edges
 #or run 
 instructions, sample_points = mesh_to_instructions.create_crochet_pattern(file, stitch_width , start_index)
@@ -44,13 +44,13 @@ instructions, sample_points = mesh_to_instructions.create_crochet_pattern(file, 
 
 The pattern can be saved as a PDF with  print_pattern.create_pattern_file. This file will include a key for crochet terminology
 
-```
+```python
 print_pattern.create_pattern_file(name-of_pattern, goal_filepath, filepath_for_picture, instructions, sample_points, stitch_width)
 ```
 
 The edges of the crochet graph that will be created in between can be shown in 3D figures.
 
-```
+```python
 import meshplot as mp
 
 p = mp.plot(all_points, c = result[1][:,1], shading= {"point_size":2 , "point_color":"red" })
