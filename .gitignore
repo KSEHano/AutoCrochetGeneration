@@ -1,0 +1,8 @@
+
+src/__pycache__/lang.cpython-39.pyc
+src/__pycache__/mesh_to_instructions.cpython-39.pyc
+src/__pycache__/strings_with_arrows.cpython-39.pyc
+src/console.py
+src/program_tests.ipynb
+src/shell.py
+src/test_speed.py
