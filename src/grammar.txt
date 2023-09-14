@@ -1,0 +1,5 @@
+literal : STRING
+factor : INT
+stitch : factor COMMA literal
+summing : stitch (COMMA stitch)*
+multing   : factor (COMMA summing)+

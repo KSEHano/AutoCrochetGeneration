@@ -1,6 +1,6 @@
 # Read ME
 This algorithm was created for a master's thesis.    
-It can create crochet patterns with single crochet, increases and decreses based on 3D models.
+It can create crochet patterns with single crochet, increases and decreases based on 3D models.
 
 ## Requirements
 You need to install *lib igl* python bindings: 
@@ -9,7 +9,7 @@ python -m pip install libigl
 ```
 or see https://github.com/libigl/libigl-python-bindings for more details
 
-and install *vedo* specifiaclly pygeodesic
+and install *vedo* specifically pygeodesic
 ```python
 pip install pygeodesic
 ```
@@ -34,7 +34,7 @@ import mesh_to_instructions
 import print_pattern
 ```
 
-You can create a pattern by running mesh_to_instructions.run the function requires a file of a 3D model, the desired stitchwidth (= metric hook size) and a start index as an integer that exists in the file.
+You can create a pattern by running mesh_to_instructions.run the function requires a file of a 3D model, the desired stitch width (= metric hook size) and a start index as an integer that exists in the file.
 
 ```python
 instructions, all_points, sample_points, faces, row_edges, column_edges, g_v, g_e, isolines = mesh_to_instructions.run(file, stitch_width , start_index) # includes results for debugging and representation such a edges
