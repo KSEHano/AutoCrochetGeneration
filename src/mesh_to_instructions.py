@@ -88,14 +88,14 @@ def get_points_in_next_row(isoPoints:np.array , sourceIndices, targetIndices, st
         numpy array of indexes for the next row
      
     """
-    epsilon = stitchwidth * 0.4
+    epsilon = stitchwidth * 0.15
     smaller = []
     bigger = []
     
-    for source in sourceIndices:
-        distance = cdist([isoPoints[source]], isoPoints[targetIndices])
-        smaller += (list(targetIndices[distance[0] < stitchwidth+epsilon]))
-        bigger += (list(targetIndices[distance[0] > stitchwidth-epsilon]))
+    #for source in sourceIndices:
+    distance = cdist(isoPoints[sourceIndices], isoPoints[targetIndices])
+    smaller = targetIndices[np.where(distance < stitchwidth+epsilon)[1]]
+    bigger = targetIndices[np.where(distance > stitchwidth-epsilon)[1]]
 
             
     point_set = set(smaller).intersection(set(bigger))
@@ -131,7 +131,7 @@ def get_path_iso_intersec_points(linePoints, pathPoints):
     close_dist.fill(100)
     
     for i, point in enumerate(pathPoints):
-        distances = distance_source_all(point, linePoints)
+        distances = cdist([point], linePoints)[0]
         arg_min = np.argsort(distances)[:2]
         mini = np.sort(distances)[:2]
         
@@ -231,7 +231,8 @@ def get_all_starting_points(iso_points, isolines:dict, path_points):
         b = ciso_point[1]
         p = cpath_point[np.argmin(cdist)]
         all_start[key] = calc_intersec_point(a,b,p)
-        
+
+    print(all_start [:5])    
     return all_ciso, all_cpath, all_start 
 
 
@@ -261,7 +262,7 @@ def sample_points_on_isoline(iso_line, start_point, stitch_width:float):
     
     while not checked_all_points:  #points left
         
-        distances = distance_source_all(start_point, iso_line) # cdist
+        distances = cdist([start_point], iso_line)[0] # cdist
         arg_sort = np.argsort(distances)
         d_sort = np.sort(distances)
         prev_d = 0
@@ -282,7 +283,7 @@ def sample_points_on_isoline(iso_line, start_point, stitch_width:float):
                     break
             
             except IndexError:
-                print("Index Error: Array is empty, try a smaller Stitch width")
+                print("Index Error: Array is empty, try a different Stitch width ot different starting point")
                 raise
             
         
@@ -407,7 +408,7 @@ def mesh_to_sample(v,f, start_index:int, stitch_width: float):
         iso_lines[key] = c_p
         mask[iso_lines[key]] = False
         #indeces_left = indeces_left[~(np.in1d(indeces_left, iso_lines[key]))]
-
+    print(iso_lines[4])
     end = time.time()
     
     times[2] = end-start
